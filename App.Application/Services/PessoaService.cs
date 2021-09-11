@@ -37,11 +37,33 @@ namespace App.Application.Services
                 }).ToList();
         }
 
-        public class PositionOptions
+        public List<Pessoa> listaPessoas(string nome, int pesoMaiorQue, int pesoMenorQue)
         {
-            public int Peso { get; set; }
-            public string Nome { get; set; }
+            nome = nome ?? "";
+
+            return _repository.Query(x =>
+
+             x.Nome.ToUpper().Contains(nome.ToUpper()) &&
+
+            (pesoMaiorQue == 0 || x.Peso >= pesoMaiorQue) &&
+            (pesoMenorQue == 0 || x.Peso <= pesoMenorQue)
+            ).Select(p => new Pessoa
+            {
+                Id = p.Id,
+                Nome = p.Nome,
+                Peso = p.Peso,
+                Cidade = new Cidade
+                {
+
+                    NomeCidade = p.Cidade.NomeCidade
+
+                }
+
+            }).OrderByDescending(x => x.Nome).ToList();
+
         }
+
+
 
         public void Salvar(Pessoa obj)
         {
