@@ -37,6 +37,12 @@ namespace App.Application.Services
                 }).ToList();
         }
 
+        public class PositionOptions
+        {
+            public int Peso { get; set; }
+            public string Nome { get; set; }
+        }
+
         public void Salvar(Pessoa obj)
         {
             if(String.IsNullOrEmpty(obj.Nome))
