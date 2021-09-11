@@ -31,14 +31,16 @@ namespace App.Api.Controllers
             return Json(_service.BuscaPorId(id));
         }
         [HttpPost("Salvar")]
-        public JsonResult Salvar(string nome, int peso, DateTime dataNascimento, bool ativo)
+        public JsonResult Salvar(string nome, int peso, DateTime dataNascimento, Guid idCidade, bool ativo)
         {
             var obj = new Pessoa
             {
                 Nome = nome,
                 DataNascimento = dataNascimento,
                 Peso = peso,
-                Ativo = ativo
+                Ativo = ativo,
+                CidadeId = idCidade,
+               
             };
             _service.Salvar(obj);
             return Json(true);

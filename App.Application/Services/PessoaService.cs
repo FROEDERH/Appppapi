@@ -23,7 +23,18 @@ namespace App.Application.Services
 
         public List<Pessoa> listaPessoas()
         {
-            return _repository.Query(x => 1 == 1).ToList();
+            return _repository.Query(x => 1 == 1)
+                .Select(p => new Pessoa
+                { 
+                Id = p.Id,
+                Nome = p.Nome,
+                Peso = p.Peso,
+                Cidade = new Cidade
+                {
+                    NomeCidade = p.Cidade.NomeCidade
+                    
+                }
+                }).ToList();
         }
 
         public void Salvar(Pessoa obj)
