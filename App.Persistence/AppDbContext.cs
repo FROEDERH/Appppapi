@@ -19,5 +19,7 @@ namespace App.Persistence
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(AppDbContext).Assembly);
         }
         public DbSet<Pessoa> pessoa { get; set; }
+
+        public DbSet<Cidade> cidade { get; set; }
     }
 }
