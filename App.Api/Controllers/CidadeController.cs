@@ -1,5 +1,7 @@
-﻿using App.Domain.Entities;
+﻿using App.Domain.DTO;
+using App.Domain.Entities;
 using App.Domain.Interfaces.Application;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -24,6 +26,22 @@ namespace App.Api.Controllers
         public JsonResult Get()
         {
             return Json(_service.listaCidades());
+        }
+
+        [HttpGet("ListaCidades")]
+        [AllowAnonymous]
+
+        public JsonResult ListaCidades()
+        {
+            try
+            {
+                var obj = _service.listaCidades();
+                return Json(RetornoApi.Sucesso(obj));
+            }
+            catch (Exception ex)
+            {
+                return Json(RetornoApi.Erro(ex.Message));
+            }
         }
 
 
