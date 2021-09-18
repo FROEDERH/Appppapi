@@ -22,11 +22,11 @@ namespace App.Api.Controllers
             _service = service;
         }
 
-        [HttpGet("ListaCidades")]
-        public JsonResult Get()
-        {
-            return Json(_service.listaCidades());
-        }
+        //[HttpGet("ListaCidades")]
+        //public JsonResult Get()
+        //{
+        //    return Json(_service.listaCidades());
+        //}
 
 
         [HttpGet("ListaCidades")]
@@ -45,26 +45,39 @@ namespace App.Api.Controllers
             }
         }
 
-
         [HttpPost("Salvar")]
-        public JsonResult Salvar(string nomeCidade, string Cep, string Uf, bool ativo)
+        public JsonResult Salvar([FromBody] Cidade obj)
         {
-            var obj = new Cidade
+                 try 
+                 {
+                 _service.Salvar(obj);
+                 return Json(RetornoApi.Sucesso(true));
+                 }
+         catch (Exception ex)
             {
-                NomeCidade = nomeCidade,
-                Cep = Cep,
-                Uf = Uf,
-                Ativo = ativo
-            };
-            _service.Salvar(obj);
-            return Json(true);
-
+             return Json(RetornoApi.Erro(ex.Message));
+             }
         }
+
+        //[HttpPost("Salvar")]
+        //public JsonResult Salvar(string nomeCidade, string Cep, string Uf, bool ativo)
+        //{
+        //    var obj = new Cidade
+        //    {
+        //        NomeCidade = nomeCidade,
+        //        Cep = Cep,
+        //        Uf = Uf,
+        //        Ativo = ativo
+        //    };
+        //    _service.Salvar(obj);
+        //    return Json(true);
+
+        //}
         [HttpDelete("Remove")]
 
         public JsonResult Remove(Guid id, bool ativo)
         {
-            
+
             _service.Remove(id);
             return Json(true);
 

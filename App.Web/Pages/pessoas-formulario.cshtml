@@ -1,0 +1,43 @@
+﻿@page "/pessoas/formulario"
+<h4>Formulario Pessoas</h4>
+
+<div class="row">
+    <div class="col-md-3 col-sm-12">
+        <div class="form-group mb-12">
+            <label>Nome</label>
+            <input type="text" name="nome" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-12">
+        <div class="form-group mb-12">
+            <label>Data Nascimento</label>
+            <input type="date" name="dataNascimento" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-12">
+        <div class="form-group mb-12">
+            <label>Peso</label>
+            <input type="text" name="peso" class="form-control">
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-12">
+        <div class="form-group mb-12">
+            <label>Cidade</label>
+            <select class="js-example-basic-single" style="width:100%"
+                    name="cidadeId" id="cidadeId"
+                    ></select>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <button class="btn btn-danger" onclick="window.location.href='/pessoas'">Cancelar</button>
+    <button class="btn btn-success" onclick="salvar();">Salvar</button>
+</div>
+
+@section Scripts {
+    <script src="~/js/pages/pessoas-formularios.js"></script>
+}

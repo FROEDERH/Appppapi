@@ -1,6 +1,8 @@
-﻿using App.Domain.Entities;
+﻿using App.Domain.DTO;
+using App.Domain.Entities;
 using App.Domain.Interfaces.Application;
 using App.Domain.Interfaces.Repositories;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,9 +67,11 @@ namespace App.Application.Services
 
 
 
+
+
         public void Salvar(Pessoa obj)
         {
-            if(String.IsNullOrEmpty(obj.Nome))
+            if (String.IsNullOrEmpty(obj.Nome))
             {
                 throw new Exception("Informe o nome");
             }
