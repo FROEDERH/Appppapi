@@ -28,6 +28,7 @@ namespace App.Api.Controllers
             return Json(_service.listaCidades());
         }
 
+
         [HttpGet("ListaCidades")]
         [AllowAnonymous]
 
