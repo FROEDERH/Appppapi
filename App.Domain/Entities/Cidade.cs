@@ -12,6 +12,6 @@ namespace App.Domain.Entities
 
         public string Uf { get; set; }
         
-        public bool Ativo { get; set; }
+       
     }
 }

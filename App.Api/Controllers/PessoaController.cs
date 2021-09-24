@@ -1,13 +1,8 @@
 ﻿using App.Domain.DTO;
 using App.Domain.Entities;
 using App.Domain.Interfaces.Application;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace App.Api.Controllers
 {
@@ -22,35 +17,25 @@ namespace App.Api.Controllers
             _service = service;
         }
 
-
-
         [HttpGet("ListaPessoas")]
         public JsonResult ListaPessoas(string nome, int pesoMaiorQue, int pesoMenorQue)
         {
-            return Json(_service.listaPessoas(nome, pesoMaiorQue, pesoMenorQue));
+            try
+            {
+                var obj = _service.listaPessoas(nome, pesoMaiorQue, pesoMenorQue);
+                return Json(RetornoApi.Sucesso(obj));
+            }
+            catch (Exception ex)
+            {
+                return Json(RetornoApi.Erro(ex.Message));
+            }
         }
+
         [HttpGet("BuscaPorId")]
         public JsonResult BuscaPorId(Guid id)
         {
             return Json(_service.BuscaPorId(id));
         }
-        //[HttpPost("Salvar")]
-        //public JsonResult Salvar(string nome, int peso, DateTime dataNascimento, Guid idCidade, bool ativo)
-        //{
-        //    var obj = new Pessoa
-        //    {
-        //        Nome = nome,
-        //        DataNascimento = dataNascimento,
-        //        Peso = peso,
-        //        Ativo = ativo,
-        //        CidadeId = idCidade,
-
-        //    };
-        //    _service.Salvar(obj);
-        //    return Json(true);
-
-        //}
-
         [HttpPost("Salvar")]
         public JsonResult Salvar([FromBody] Pessoa obj)
         {
@@ -64,6 +49,21 @@ namespace App.Api.Controllers
                 return Json(RetornoApi.Erro(ex.Message));
             }
         }
+
+        [HttpDelete("Remover")]
+        public JsonResult Remover(Guid id)
+        {
+            try
+            {
+                _service.Remover(id);
+                return Json(RetornoApi.Sucesso(true));
+            }
+            catch (Exception ex)
+            {
+                return Json(RetornoApi.Erro(ex.Message));
+            }
+        }
+
 
     }
 }
